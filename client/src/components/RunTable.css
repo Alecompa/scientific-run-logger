@@ -1,0 +1,10 @@
+/* client/src/components/RunTable.css */
+.table-container {
+    height: 400px;
+    /* Adjust based on your header/footer height */
+    overflow-y: auto;
+}
+
+.table {
+    width: 100%;
+}

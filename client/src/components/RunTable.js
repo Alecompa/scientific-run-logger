@@ -1,0 +1,38 @@
+// client/src/components/RunTable.js
+import React from 'react';
+import { format } from 'date-fns';
+import './RunTable.css'; // Import the CSS file for styling
+
+const RunTable = ({ runs }) => {
+
+    const formatDateTime = (dateTime) => {
+        return format(new Date(dateTime), 'Pp');
+    };
+    
+    return (
+        <div className="table-container">
+            <table className="table table-striped mt-4">
+                <thead>
+                    <tr>
+                        <th>Run Number</th>
+                        <th>Start Time</th>
+                        <th>Run Type</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {runs.map((run) => (
+                        <tr key={run.id}>
+                            <td>{run.run_number}</td>
+                            <td>{formatDateTime(run.start_time)}</td>
+                            <td>{run.run_type}</td>
+                            <td>{run.notes}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
+};
+
+export default RunTable;
