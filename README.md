@@ -5,6 +5,13 @@
 ## Description
 A web application for logging and visualizing metadata.
 
+## Features
+- [x] User interface for logging metadata built with React.js
+- [x] Metadata storage in SQLite database
+- [x] User authentication and registration
+- [x] Table to display the last logged entries 
+- [ ] Support for visualization options
+
 ## Technologies Used
 
 ### Backend
