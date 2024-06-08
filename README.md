@@ -1,9 +1,8 @@
 # LUNA-metadata-logger
 
-![LUNA](assets/screenshot.png)
-
-## Description
 A web application for logging and visualizing metadata.
+
+![LUNA](assets/screenshot.png)
 
 ## Features
 - [x] User interface for logging metadata built with React.js
