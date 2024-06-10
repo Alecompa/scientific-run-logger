@@ -1,6 +1,6 @@
 # LUNA-metadata-logger
 
-A web application for logging and visualizing metadata.
+*A web application for logging and visualizing metadata. Backend is writtend in Node.js with Express, frontend in React.*
 
 ![LUNA](assets/screenshot.png)
 
@@ -30,6 +30,8 @@ A web application for logging and visualizing metadata.
 
 
 ## Setup
+### Requirements
+To test the application locally just install Node.js with your package manager of choice (e.g. `brew install node` on a mac). Dependencies are handled by `npm` package manager.
 
 ### Server
 1. Navigate to the `/server` directory.
