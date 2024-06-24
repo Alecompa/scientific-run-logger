@@ -4,9 +4,13 @@ import './RunForm.css'; // Custom CSS file for additional styling
 
 const RunForm = ({ token, onRunSubmit }) => {
     const [runNumber, setRunNumber] = useState('');
-    const [notes, setNotes] = useState('');
     const [startTime, setStartTime] = useState('');
     const [runType, setRunType] = useState('');
+    const [chargeValue, setChargeValue] = useState('');
+    const [scanNumber, setScanNumber] = useState('');
+    const [roiValue, setRoi] = useState('');
+    const [isitTrash, setTrash] = useState('');
+    const [notes, setNotes] = useState('');
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
 
@@ -42,9 +46,13 @@ const RunForm = ({ token, onRunSubmit }) => {
         try {
             await axios.post('http://localhost:3000/runs/', {
                 run_number: runNumber,
-                notes: notes,
                 start_time: startTime,
-                run_type: runType
+                run_type: runType,
+                scan_number: scanNumber,
+                charge: chargeValue,
+                roi: roiValue,
+                isit_trash: isitTrash,
+                notes: notes
             }, {
                 headers: { Authorization: token }
             });
@@ -91,21 +99,42 @@ const RunForm = ({ token, onRunSubmit }) => {
                             <input type="number" value={runNumber} onChange={e => setRunNumber(e.target.value)} className="form-control" placeholder="Run Number" required />
                         </div>
                         <div className="form-group">
-                            <label>Notes</label>
-                            <input type="text" value={notes} onChange={e => setNotes(e.target.value)} className="form-control" placeholder="Notes" />
-                        </div>
-                        <div className="form-group">
                             <label>Start Time</label>
                             <input type="datetime-local" value={startTime} onChange={e => setStartTime(e.target.value)} className="form-control" />
                         </div>
                         <div className="form-group">
                             <label>Run Type</label>
-                            <select value={runType} onChange={e => setRunType(e.target.value)} className="form-control">
+                            <select value={runType} onChange={e => setRunType(e.target.value)} className="form-control" required>
+                                <option value="">--Please choose an option--</option>
                                 <option value="long_run">Long Run</option>
-                                <option value="scan">scan</option>
+                                <option value="scan">Scan</option>
                                 <option value="Type3">Type3</option>
                                 <option value="Type4">Type4</option>
                             </select>
+                        </div>
+                        <div className="form-group">
+                            <label>Scan Number</label>
+                            <input type="number" value={scanNumber} onChange={e => setScanNumber(e.target.value)} className="form-control" placeholder="Scan number" />
+                        </div>
+                        <div className="form-group">
+                            <label>Charge</label>
+                            <input type="number" value={chargeValue} onChange={e => setChargeValue(e.target.value)} className="form-control" placeholder="Charge value in uC" required />
+                        </div>
+                        <div className="form-group">
+                            <label>ROI</label>
+                            <input type="text" value={roiValue} onChange={e => setRoi(e.target.value)} className="form-control" placeholder="Integration ROI" />
+                        </div>
+                        <div className="form-group">
+                            <label>Valid run</label>
+                            <select value={isitTrash} onChange={e => setTrash(e.target.value)} className="form-control" required>
+                                <option value="">--Please choose an option--</option>
+                                <option values="yes">Yes</option>
+                                <option values="no">No</option>
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label>Notes</label>
+                            <input type="text" value={notes} onChange={e => setNotes(e.target.value)} className="form-control" placeholder="Notes" />
                         </div>
                         {error && <div className="alert alert-danger mt-3">{error}</div>}
                         {success && <div className="alert alert-success mt-3">{success}</div>}
