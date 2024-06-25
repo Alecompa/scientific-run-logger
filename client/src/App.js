@@ -66,8 +66,8 @@ const App = () => {
   return (
     <div className="container mt-4">
       <h1 align="center">Metadata Logger</h1>
-      <RunForm token={token} onRunSubmit={handleRunSubmit}/>
-      <RunTable runs={runs} />
+      <RunForm token={token} onRunSubmit={handleRunSubmit} />
+        <RunTable runs={runs} />
     </div>
   );
 };

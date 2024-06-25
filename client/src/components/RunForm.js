@@ -82,7 +82,7 @@ const RunForm = ({ token, onRunSubmit }) => {
     };
 
     return (
-        <div className="container mt-4">
+        <div className="container mt-4 ">
             <div className="row justify-content-center">
                 <div className="col-md-6">
                     <form onSubmit={handleSubmit} className="form-container p-4 shadow-sm rounded">
