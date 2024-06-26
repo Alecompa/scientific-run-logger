@@ -13,6 +13,7 @@ const LoginForm = ({ setToken }) => {
         try {
             const response = await axios.post('http://localhost:3000/auth/login', { username, password });
             setToken(response.data.token);
+            localStorage.setItem('token', response.data.token);
             setError(null);
         } catch (error) {
             setError("Failed to login. Please check your credentials.");

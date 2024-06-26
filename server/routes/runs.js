@@ -27,4 +27,26 @@ router.get('/next-run-number', authenticate, async (req, res) => {
     }
 });
 
+router.post('/add-note', authenticate, async (req, res) => {
+    const runNumber = req.body.runNumber;
+    const note = req.body.note;
+    console.log(runNumber, note);
+    const run = await Run.findOne({ where: { run_number: runNumber } });
+    if (!run) {
+        return res.status(404).json({ error: 'Run not found' });
+    }
+    run.notes = note;
+    await run.save();
+    res.json(run);
+});
+
+router.get('/get-note/:runsNumber', authenticate, async (req, res) => {
+    const runNumber = req.params.runsNumber;
+    const run = await Run.findOne({ where: { run_number: runNumber } });
+    if (!run) {
+        return res.status(404).json({ error: 'Run not found' });
+    }
+    res.json({ note: run.notes });
+});
+
 module.exports = router;

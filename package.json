@@ -9,6 +9,7 @@
         "start": "concurrently \"npm run start --prefix server\" \"npm run start --prefix client\""
     },
     "dependencies": {
+        "bootstrap": "^5.3.3",
         "concurrently": "^8.2.2"
     }
 }
