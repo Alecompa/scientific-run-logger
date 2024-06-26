@@ -11,6 +11,9 @@
 # production
 /build
 
+# jupyter
+.ipynb_checkpoints
+
 # misc
 .DS_Store
 .env.local
