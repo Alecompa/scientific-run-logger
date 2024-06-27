@@ -16,10 +16,11 @@ const RunTable = ({ runs }) => {
                     <tr>
                         <th>Run Number</th>
                         <th>Start Time</th>
+                        <th>Stop Time</th>
+                        <th>Real Time</th>
                         <th>Run Type</th>
                         <th>Scan Number</th>
                         <th>Charge</th>
-                        <th>ROI</th>
                         <th>Valid</th>
                         <th>Notes</th>
                     </tr>
@@ -29,10 +30,11 @@ const RunTable = ({ runs }) => {
                         <tr key={run.id}>
                             <td>{run.run_number}</td>
                             <td>{formatDateTime(run.start_time)}</td>
+                            <td>{formatDateTime(run.stop_time)}</td>
+                            <td>{run.real_time}</td>
                             <td>{run.run_type}</td>
                             <td>{run.scan_number}</td>
                             <td>{run.charge}</td>
-                            <td>{run.roi}</td>
                             <td>{run.isit_trash}</td>
                             <td>{run.notes}</td>
                         </tr>

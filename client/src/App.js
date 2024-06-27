@@ -84,7 +84,6 @@ const App = () => {
 
     fetchRuns();
   }
-
   return (
     <div className="container mt-4">
       <Navbar expand="lg" className="bg-body-tertiary">

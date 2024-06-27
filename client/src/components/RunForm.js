@@ -5,10 +5,11 @@ import './RunForm.css'; // Custom CSS file for additional styling
 const RunForm = ({ token, onRunSubmit }) => {
     const [runNumber, setRunNumber] = useState('');
     const [startTime, setStartTime] = useState('');
+    const [stopTime, setStopTime] = useState('');
+    const [realTime, setRealTime] = useState('');
     const [runType, setRunType] = useState('');
     const [chargeValue, setChargeValue] = useState('');
     const [scanNumber, setScanNumber] = useState('');
-    const [roiValue, setRoi] = useState('');
     const [isitTrash, setTrash] = useState('');
     const [notes, setNotes] = useState('');
     const [error, setError] = useState(null);
@@ -47,10 +48,11 @@ const RunForm = ({ token, onRunSubmit }) => {
             await axios.post('http://localhost:3000/runs/', {
                 run_number: runNumber,
                 start_time: startTime,
+                stop_time: stopTime,
+                real_time: realTime,
                 run_type: runType,
                 scan_number: scanNumber,
                 charge: chargeValue,
-                roi: roiValue,
                 isit_trash: isitTrash,
                 notes: notes
             }, {
@@ -72,7 +74,7 @@ const RunForm = ({ token, onRunSubmit }) => {
                 const hours = String(now.getHours()).padStart(2, '0');
                 const minutes = String(now.getMinutes()).padStart(2, '0');
                 setStartTime(`${year}-${month}-${day}T${hours}:${minutes}`);
-            }
+            };
 
             fetchCurrentDatetime();
             //setRunType('long_run');
@@ -88,6 +90,24 @@ const RunForm = ({ token, onRunSubmit }) => {
             setSuccess(null);
         }
     };
+    const handleDateClick_start = () => {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        setStartTime(`${year}-${month}-${day}T${hours}:${minutes}`);
+    };
+    const handleDateClick_stop = () => {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        setStopTime(`${year}-${month}-${day}T${hours}:${minutes}`);
+    };
 
     return (
         <div className="container mt-4 ">
@@ -99,7 +119,29 @@ const RunForm = ({ token, onRunSubmit }) => {
                         </div>
                         <div className="form-group">
                             <label>Start Time</label>
-                            <input type="datetime-local" value={startTime} onChange={e => setStartTime(e.target.value)} className="form-control" />
+                            <div class="row align-items-center">
+                                <div class="col align-self-center">
+                                    <input type="datetime-local" value={startTime} onChange={e => setStartTime(e.target.value)} className="form-control"/>
+                                </div>
+                                <div class="col align-self-center">
+                                    <button type="button" onClick={e => setStartTime(handleDateClick_start)} className="btn btn-secondary w-100">Get time</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <label>Stop Time</label>
+                            <div class="row align-items-center">
+                                <div class="col align-self-center">
+                                    <input type="datetime-local" value={stopTime} onChange={e => setStopTime(e.target.value)} className="form-control"/>
+                                </div>
+                                <div class="col align-self-center">
+                                    <button type="button" onClick={e => setStopTime(handleDateClick_stop)} className="btn btn-secondary w-100">Get time</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <label>Real Time</label>
+                            <input type="number" value={realTime} onChange={e => setRealTime(e.target.value)} className="form-control" placeholder="Real time [us]"/>
                         </div>
                         <div className="form-group">
                             <label>Run Type</label>
@@ -117,11 +159,7 @@ const RunForm = ({ token, onRunSubmit }) => {
                         </div>
                         <div className="form-group">
                             <label>Charge</label>
-                            <input type="number" value={chargeValue} onChange={e => setChargeValue(e.target.value)} className="form-control" placeholder="Charge value in uC" required />
-                        </div>
-                        <div className="form-group">
-                            <label>ROI</label>
-                            <input type="text" value={roiValue} onChange={e => setRoi(e.target.value)} className="form-control" placeholder="Integration ROI" />
+                            <input type="number" value={chargeValue} onChange={e => setChargeValue(e.target.value)} className="form-control" placeholder="Charge value [uC]" required />
                         </div>
                         <div className="form-group">
                             <label>Valid run</label>
@@ -137,7 +175,7 @@ const RunForm = ({ token, onRunSubmit }) => {
                         </div>
                         {error && <div className="alert alert-danger mt-3">{error}</div>}
                         {success && <div className="alert alert-success mt-3">{success}</div>}
-                        <button type="submit" className="btn btn-primary mt-3 w-100">Add log</button>
+                        <button type="submit" className="btn btn-primary mt-3 w-100">Submit</button>
                     </form>
             </div>
         </div>
